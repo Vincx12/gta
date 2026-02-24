@@ -12,13 +12,13 @@ description: "Remote recipe: txAdmin télécharge d'abord TON repo (recipe_files
 # - Modifie ci-dessous 'src:' pour pointer vers ton repo GitHub
 
 vars:
-  CUSTOM_REPO: "https://github.com/Vincx12/rp-fr-v8"   # <-- CHANGE ICI si ton repo a un autre nom
+  CUSTOM_REPO: "https://github.com/Vincx12/gta.git"   # <-- CHANGE ICI si ton repo a un autre nom
   CUSTOM_REF: "main"
 
 tasks:
   # 0) Télécharge TON repo (recipe_files)
   - action: download_github
-    src: "{{CUSTOM_REPO}}"
+    src: "https://github.com/Vincx12/gta.git"
     ref: "{{CUSTOM_REF}}"
     dest: ./tmp/custom
 
