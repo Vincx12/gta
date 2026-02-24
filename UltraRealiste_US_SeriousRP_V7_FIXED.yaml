@@ -1,0 +1,214 @@
+$engine: 3
+$onesync: on
+name: "US Serious RP (V7) — Billing + Court + Governor + V6 Features"
+version: "7.0.0"
+author: "txAdmin Recipe Pack"
+description: "QBCore US serious RP: hard economy + realistic prices + mechanic customs + financing + driving school + speed cameras + billing for all businesses + judge/lawyer system + governor."
+
+tasks:
+  - action: download_github
+    src: https://github.com/qbcore-framework/txAdminRecipe
+    ref: main
+    dest: ./tmp/qbcore
+
+
+- action: download_github
+  src: https://github.com/Vincx12/gta
+  ref: main
+  dest: ./recipe
+
+  - action: move_path
+    src: ./recipe/recipe_files/server.cfg
+    dest: ./server.cfg
+
+  - action: move_path
+    src: ./tmp/qbcore/myLogo.png
+    dest: ./myLogo.png
+
+  - action: connect_database
+  - action: query_database
+    file: ./tmp/qbcore/qbcore.sql
+
+  - action: download_github
+    src: https://github.com/citizenfx/cfx-server-data
+    subpath: resources
+    dest: ./resources/[cfx-default]
+  - action: remove_path
+    path: ./resources/[cfx-default]/[gameplay]/chat
+
+  - action: download_file
+    path: ./tmp/files/oxmysql.zip
+    url: https://github.com/overextended/oxmysql/releases/download/v2.12.0/oxmysql.zip
+  - action: unzip
+    dest: ./resources/[standalone]
+    src: ./tmp/files/oxmysql.zip
+
+  # Core UI deps
+  - action: download_github
+    dest: ./resources/[qb]/qb-menu
+    ref: main
+    src: https://github.com/qbcore-framework/qb-menu
+  - action: download_github
+    dest: ./resources/[qb]/qb-input
+    ref: main
+    src: https://github.com/qbcore-framework/qb-input
+  - action: download_github
+    dest: ./resources/[qb]/qb-target
+    ref: main
+    src: https://github.com/qbcore-framework/qb-target
+
+  # Voice + deps
+  - action: download_github
+    dest: ./resources/[voice]/pma-voice
+    ref: main
+    src: https://github.com/AvarianKnight/pma-voice
+
+  - action: download_github
+    dest: ./resources/[standalone]/progressbar
+    ref: main
+    src: https://github.com/qbcore-framework/progressbar
+  - action: download_github
+    dest: ./resources/[standalone]/interact-sound
+    ref: master
+    src: https://github.com/qbcore-framework/interact-sound
+  - action: download_github
+    dest: ./resources/[standalone]/PolyZone
+    ref: master
+    src: https://github.com/qbcore-framework/PolyZone
+
+  - action: download_github
+    dest: ./resources/[defaultmaps]/hospital_map
+    ref: main
+    src: https://github.com/qbcore-framework/hospital_map
+
+  # QBCore essentials
+  - action: download_github
+    dest: ./resources/[qb]/qb-core
+    ref: main
+    src: https://github.com/qbcore-framework/qb-core
+  - action: download_github
+    dest: ./resources/[qb]/qb-management
+    ref: main
+    src: https://github.com/qbcore-framework/qb-management
+  - action: download_github
+    dest: ./resources/[qb]/qb-cityhall
+    ref: main
+    src: https://github.com/qbcore-framework/qb-cityhall
+  - action: download_github
+    dest: ./resources/[qb]/qb-policejob
+    ref: main
+    src: https://github.com/qbcore-framework/qb-policejob
+  - action: download_github
+    dest: ./resources/[qb]/qb-ambulancejob
+    ref: main
+    src: https://github.com/qbcore-framework/qb-ambulancejob
+  - action: download_github
+    dest: ./resources/[qb]/qb-mechanicjob
+    ref: main
+    src: https://github.com/qbcore-framework/qb-mechanicjob
+  - action: download_github
+    dest: ./resources/[qb]/qb-customs
+    ref: main
+    src: https://github.com/xenfovn/qb-customs-2
+  - action: download_github
+    dest: ./resources/[qb]/qb-vehicleshop
+    ref: main
+    src: https://github.com/qbcore-framework/qb-vehicleshop
+  - action: download_github
+    dest: ./resources/[qb]/qb-vehiclesales
+    ref: main
+    src: https://github.com/qbcore-framework/qb-vehiclesales
+  - action: download_github
+    dest: ./resources/[qb]/qb-shops
+    ref: main
+    src: https://github.com/qbcore-framework/qb-shops
+  - action: download_github
+    dest: ./resources/[qb]/qb-fuel
+    ref: main
+    src: https://github.com/qbcore-framework/qb-fuel
+  - action: download_github
+    dest: ./resources/[qb]/qb-banking
+    ref: main
+    src: https://github.com/qbcore-framework/qb-banking
+  - action: download_github
+    dest: ./resources/[qb]/qb-inventory
+    ref: main
+    src: https://github.com/qbcore-framework/qb-inventory
+  - action: download_github
+    dest: ./resources/[qb]/qb-hud
+    ref: main
+    src: https://github.com/qbcore-framework/qb-hud
+  - action: download_github
+    dest: ./resources/[qb]/qb-phone
+    ref: main
+    src: https://github.com/qbcore-framework/qb-phone
+
+  # Billing for all businesses (company billing)
+  - action: download_github
+    dest: ./resources/[qb]/qb-sna-billing
+    ref: main
+    src: https://github.com/Sna-aaa/qb-sna-billing
+
+  # Lawyer job resource
+  - action: download_github
+    dest: ./resources/[qb]/qb-lawyerjob
+    ref: main
+    src: https://github.com/viruspc2002/qb-lawyerjob
+
+  # Speed cameras
+  - action: download_github
+    dest: ./resources/[qb]/qb-speedcameras
+    ref: main
+    src: https://github.com/tom-osborne/qb-speedcameras
+
+  # Apply V7 patches (overwrite configs)
+  - action: move_path
+    src: ./recipe/recipe_files/qbcore_config.lua
+    dest: ./resources/[qb]/qb-core/config.lua
+    overwrite: true
+  - action: move_path
+    src: ./recipe/recipe_files/qbcore_jobs.lua
+    dest: ./resources/[qb]/qb-core/shared/jobs.lua
+    overwrite: true
+  - action: move_path
+    src: ./recipe/recipe_files/qb_shops_config.lua
+    dest: ./resources/[qb]/qb-shops/config.lua
+    overwrite: true
+  - action: move_path
+    src: ./recipe/recipe_files/qb_fuel_config.lua
+    dest: ./resources/[qb]/qb-fuel/config.lua
+    overwrite: true
+  - action: move_path
+    src: ./recipe/recipe_files/qb_ambulance_config.lua
+    dest: ./resources/[qb]/qb-ambulancejob/config.lua
+    overwrite: true
+  - action: move_path
+    src: ./recipe/recipe_files/qb_police_config.lua
+    dest: ./resources/[qb]/qb-policejob/config.lua
+    overwrite: true
+  - action: move_path
+    src: ./recipe/recipe_files/qb_vehicleshop_config.lua
+    dest: ./resources/[qb]/qb-vehicleshop/config.lua
+    overwrite: true
+  - action: move_path
+    src: ./recipe/recipe_files/qb_speedcameras_config.lua
+    dest: ./resources/[qb]/qb-speedcameras/config.lua
+    overwrite: true
+  - action: move_path
+    src: ./recipe/recipe_files/qb_sna_billing_config.lua
+    dest: ./resources/[qb]/qb-sna-billing/config.lua
+    overwrite: true
+
+  # Add local governor + court resources
+  - action: copy_path
+    src: ./recipe/recipe_files/qb-governor
+    dest: ./resources/[qb]/qb-governor
+  - action: copy_path
+    src: ./recipe/recipe_files/qb-court-basic
+    dest: ./resources/[qb]/qb-court-basic
+  - action: copy_path
+    src: ./recipe/recipe_files/ultra_realism
+    dest: ./resources/[standalone]/ultra_realism
+
+  - action: remove_path
+    path: ./tmp
