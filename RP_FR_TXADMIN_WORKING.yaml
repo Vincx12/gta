@@ -1,0 +1,22 @@
+$engine: 3
+$onesync: on
+name: RP FR FULL CLEAN (WORKING)
+author: ChatGPT
+description: Recette fonctionnelle pour txAdmin via GitHub
+
+tasks:
+  - action: download_github
+    src: https://github.com/Vincx12/gta
+    ref: main
+    dest: ./tmp/custom
+
+  - action: move_path
+    src: ./tmp/custom/recipe_files/server.cfg
+    dest: ./server.cfg
+
+  - action: copy_path
+    src: ./tmp/custom/recipe_files
+    dest: ./resources
+
+  - action: remove_path
+    path: ./tmp
