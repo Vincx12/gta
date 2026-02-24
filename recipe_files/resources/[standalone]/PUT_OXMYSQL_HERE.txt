@@ -1,1 +1,0 @@
-Place ici oxmysql (dossier oxmysql).
