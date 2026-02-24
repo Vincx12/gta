@@ -1,0 +1,41 @@
+$schema: https://raw.githubusercontent.com/citizenfx/txAdmin/master/schema.json
+
+name: RP FR QBCore - Install propre (clean dest)
+author: Vincx12
+description: Télécharge le repo GitHub puis déplace chaque ressource vers ./resources. Supprime d'abord les dossiers cibles si ils existent.
+
+tasks:
+  - action: download_github
+    src: https://github.com/Vincx12/gta
+    ref: main
+    dest: ./temp
+
+  # server.cfg à la racine
+  - action: move_path
+    src: ./temp/recipe_files/server.cfg
+    dest: ./server.cfg
+
+  # Nettoyage des dossiers cibles pour éviter "dest already exists"
+  - action: remove_path
+    path: ./resources/ultra_realism
+  - action: remove_path
+    path: ./resources/qb-prefet
+  - action: remove_path
+    path: ./resources/qb-tribunal-basic
+
+  # Déplacer chaque ressource (dossier contenant fxmanifest.lua) vers ./resources/<nom>
+  - action: move_path
+    src: ./temp/recipe_files/ultra_realism
+    dest: ./resources/ultra_realism
+
+  - action: move_path
+    src: ./temp/recipe_files/qb-prefet
+    dest: ./resources/qb-prefet
+
+  - action: move_path
+    src: ./temp/recipe_files/qb-tribunal-basic
+    dest: ./resources/qb-tribunal-basic
+
+  # Nettoyage
+  - action: remove_path
+    path: ./temp
