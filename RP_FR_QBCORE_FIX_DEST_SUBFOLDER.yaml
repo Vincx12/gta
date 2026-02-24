@@ -1,0 +1,29 @@
+$schema: https://raw.githubusercontent.com/citizenfx/txAdmin/master/schema.json
+
+name: RP FR QBCore - Fix dest exists (pack subfolder)
+author: Vincx12
+description: Déploiement txAdmin GitHub sans conflit sur ./resources (place les ressources dans un sous-dossier)
+
+tasks:
+  - action: download_github
+    src: https://github.com/Vincx12/gta
+    ref: main
+    dest: ./temp
+
+  # Met le server.cfg à la racine
+  - action: move_path
+    src: ./temp/recipe_files/server.cfg
+    dest: ./server.cfg
+
+  # Crée un sous-dossier unique dans /resources et y place tout le pack
+  # (évite l'erreur "dest already exists" car /resources existe déjà toujours)
+  - action: ensure_dir
+    path: ./resources/rp_fr_pack
+
+  - action: move_path
+    src: ./temp/recipe_files/resources
+    dest: ./resources/rp_fr_pack
+
+  # Nettoyage
+  - action: remove_path
+    path: ./temp
