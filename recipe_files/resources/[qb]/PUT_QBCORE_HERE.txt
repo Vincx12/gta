@@ -1,0 +1,1 @@
+Place ici tes ressources QBCore: qb-core, qb-target, qb-smallresources, etc.

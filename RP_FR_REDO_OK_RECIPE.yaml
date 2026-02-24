@@ -1,0 +1,30 @@
+$schema: "https://raw.githubusercontent.com/tabarra/txAdmin/master/docs/recipe/schema.json"
+name: "RP FR - Repo Structure (txAdmin)"
+author: "ChatGPT"
+description: "Déploie un repo GitHub contenant recipe_files (server.cfg + resources)."
+version: "1.0.0"
+
+tasks:
+  - action: download_github
+    src: "REPLACE_WITH_YOUR_REPO_URL"
+    ref: "main"
+    dest: "./tmp/repo"
+
+  # Clean previous deploy safely (only what we place)
+  - action: remove_path
+    path: "./resources"
+
+  - action: remove_path
+    path: "./server.cfg"
+
+  - action: ensure_dir
+    path: "./resources"
+
+  # Move in the files from the repo
+  - action: move_path
+    src: "./tmp/repo/recipe_files/resources"
+    dest: "./resources"
+
+  - action: move_path
+    src: "./tmp/repo/recipe_files/server.cfg"
+    dest: "./server.cfg"
